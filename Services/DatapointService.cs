@@ -23,7 +23,9 @@ namespace WeatherApp2023.Services
         {
             var dps = await _datapointRepository.GetDatapointsByCityAsync(cityName);
 
-            return dps.GroupBy(e => e.LastUpdate)
+            return dps
+                .Where(e => e.LastUpdate > (DateTime.Now.AddHours(-16)))
+                .GroupBy(e => e.LastUpdate)
                 .Select(g => g.First());
         }
     }

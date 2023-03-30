@@ -66,13 +66,13 @@ public class WeatherController : Controller
         {
             temperatureDatapointsForGraph.Add(new DataPointGraph
             {
-                Label = datapoint.DatapointTime.ToString("hh:mm:ss"),
+                Label = datapoint.DatapointTime.ToString("M/d hh:mm:ss"),
                 Y = datapoint.Temperature
             });
 
             windDatapointsForGraph.Add(new DataPointGraph
             {
-                Label = datapoint.DatapointTime.ToString("hh:mm:ss"),
+                Label = datapoint.DatapointTime.ToString("M/d hh:mm:ss"),
                 Y = datapoint.WindSpeed
             });
 

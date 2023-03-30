@@ -10,10 +10,8 @@
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script type="text/javascript">
         
-
 		window.onload = function () {
-
-
+            
             if ('@Model.SelectedCityValue' != '') {
                 var temperatureChart = new CanvasJS.Chart("temperatureChartContainer",
                     {
@@ -23,14 +21,19 @@
                         data: [
                             {
                                 type: "line",
-                                name: "Minutes back in time",
+                                name: "Time",
                                 showInLegend: true,
                                 dataPoints: @Html.Raw( @Model.TemperatureDatapointsForGraph)
                                     }
                         ]
                     });
                 temperatureChart.render();
-                calculateTrendLine(temperatureChart);
+
+                $(function () {
+                    $('#temperatureChartContainer').click(function (event) {
+                        calculateTrendLine(temperatureChart);
+                    });
+                });
                 
                 var windChart = new CanvasJS.Chart("windChartContainer",
                 {
@@ -46,10 +49,14 @@
                                 }
                     ]
                 });
-
             
-            windChart.render();
-            calculateTrendLine(windChart);
+				windChart.render();
+
+                $(function () {
+                    $('#windChartContainer').click(function (event) {
+                        calculateTrendLine(windChart);
+                    });
+                });
             }
 
 
@@ -89,9 +96,7 @@
                 console.log("Called with x = " + x);
                 return { x: x, y: ((slope * x) + intercept) };
             }
-		}
-
-        
+        }        
 	</script>
 
 </head>
